@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 '''
-This is The Package initializer That runs at the every execution of our program
+    Package initializer
 '''
 from os import getenv
 from models.base_model import BaseModel
@@ -23,7 +23,4 @@ classes = {"User": User, "BaseModel": BaseModel,
            "City": City, "Amenity": Amenity,
            "Review": Review}
 
-storage.reload()
-
-storage = FileStorage()
 storage.reload()

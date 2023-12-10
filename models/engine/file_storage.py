@@ -15,16 +15,13 @@ class FileStorage:
 
     def all(self, cls=None):
         '''
-        Return the dictionary.
-        If cls is provided, filter instances based on the class name.
+            Return the dictionary
         '''
         new_dict = {}
         if cls is None:
             return self.__objects
 
         if cls != "":
-            if not isinstance(cls, str):
-                cls = cls.__name__
             for k, v in self.__objects.items():
                 if cls == k.split(".")[0]:
                     new_dict[k] = v
@@ -34,26 +31,28 @@ class FileStorage:
 
     def new(self, obj):
         '''
-        Set in __objects the obj with key <obj class name>.id.
-        Arguments:
-            obj : An instance object.
+            Set in __objects the obj with key <obj class name>.id
+            Aguments:
+                obj : An instance object.
         '''
-        key = f"{obj.__class__.__name__}.{obj.id}"
+        key = str(obj.__class__.__name__) + "." + str(obj.id)
         value_dict = obj
         FileStorage.__objects[key] = value_dict
 
     def save(self):
         '''
-        Serializes __objects attribute to JSON file.
+            Serializes __objects attribute to JSON file.
         '''
-        objects_dict = {key: val.to_dict() for key, val in FileStorage.__objects.items()}
+        objects_dict = {}
+        for key, val in FileStorage.__objects.items():
+            objects_dict[key] = val.to_dict()
 
         with open(FileStorage.__file_path, mode='w', encoding="UTF8") as fd:
             json.dump(objects_dict, fd)
 
     def reload(self):
         '''
-        Deserializes the JSON file to __objects.
+            Deserializes the JSON file to __objects.
         '''
         try:
             with open(FileStorage.__file_path, encoding="UTF8") as fd:
@@ -67,15 +66,15 @@ class FileStorage:
 
     def delete(self, obj=None):
         '''
-        Deletes an obj from __objects.
+        Deletes an obj
         '''
         if obj is not None:
-            key = f"{obj.__class__.__name__}.{obj.id}"
+            key = str(obj.__class__.__name__) + "." + str(obj.id)
             FileStorage.__objects.pop(key, None)
             self.save()
 
     def close(self):
         '''
-        Reloads __objects.
+        Deserialize JSON file to objects
         '''
         self.reload()
