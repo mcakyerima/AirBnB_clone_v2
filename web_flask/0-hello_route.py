@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 """
-This Script Starts a Flask App and listens on 0.0.0.0,
-	Listens on port 5000.
-	Home route /: displays "Hello HBNB!"
+This script starts a Flask web app that
+    listen on 0.0.0.0, port 5000
+    routes: /: display "Hello HBNB!"
 """
 
 from flask import Flask
 app = Flask(__name__)
 
+
 @app.route('/', strict_slashes=False)
 def hello_hbnb():
-    """displays Hello HBNB!"""
+    """displays text HBNB!"""
     return "Hello HBNB!"
 
 
