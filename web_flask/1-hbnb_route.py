@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-This script starts a Flask web app that
-    listen on 0.0.0.0, port 5000
-    routes: /: display "Hello HBNB!"
+    Python Flask script that starts up and applications and
+    creates two routes / amd /hbnb
 """
 
 from flask import Flask
@@ -10,16 +9,16 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_hbnb():
-    """displays text HBNB!"""
-    return "Hello HBNB!"
+def home():
+    """ returning the result"""
+    return ("Hello HBNB!")
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """displays text HBNB"""
-    return "HBNB"
+def home_hbnb():
+    """ working on the file"""
+    return ("HBNB")
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=False)
